@@ -1,0 +1,324 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:300italic");
+
+/* CSS VARIABLES (converted from SCSS) */
+:root {
+  --color-env: #ff748d;
+  --color-env2: #ff748d;
+  --color-flap: #ff98a7;
+  --color-bg: #d8effd;
+  --color-heart: #d00000;
+
+  --env-border-radius: 6px;
+  --env-width: 280px;
+  --env-height: 180px;
+  --heart-width: 50px;
+}
+
+/* GLOBAL */
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #ffb6d5; /* pink background for cake */
+  font-family: "Lato", sans-serif;
+}
+
+/* ===========================================================
+   BIRTHDAY CAKE ANIMATION
+   =========================================================== */
+
+#cake {
+  display: block;
+  position: relative;
+  margin: -10em auto 0 auto;
+}
+
+/* Candle */
+.candle {
+  background: #ffe0ef;
+  border-radius: 10px;
+  position: absolute;
+  top: 228px;
+  left: 50%;
+  margin-left: -2.4px;
+  margin-top: -8.33px;
+  width: 5px;
+  height: 35px;
+  transform: translateY(-300px);
+  backface-visibility: hidden;
+  animation: in 0.5s 6s ease-out forwards;
+}
+
+.candle:after,
+.candle:before {
+  background: rgba(255, 105, 180, 0.4);
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2.2px;
+}
+
+.candle:after { top: 25%; }
+.candle:before { top: 45%; }
+
+/* Flame */
+.fire {
+  border-radius: 100%;
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  margin-left: -2.6px;
+  width: 7px;
+  height: 18px;
+}
+
+.fire:nth-child(1) { animation: fire 2s 6.5s infinite; }
+.fire:nth-child(2) { animation: fire 1.5s 6.5s infinite; }
+.fire:nth-child(3) { animation: fire 1s 6.5s infinite; }
+.fire:nth-child(4) { animation: fire 0.5s 6.5s infinite; }
+.fire:nth-child(5) { animation: fire 0.2s 6.5s infinite; }
+
+@keyframes fire {
+  0%, 100% {
+    background: rgba(255,165,0,0.85);
+    box-shadow: 0 0 40px 15px rgba(255,140,0,0.6);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    background: rgba(255,80,0,0.3);
+    box-shadow: 0 0 40px 25px rgba(255,160,0,0.5);
+    transform: translateY(-20px) scale(0);
+  }
+}
+
+@keyframes in {
+  to { transform: translateY(0); }
+}
+
+/* Cake Text */
+.text {
+  color: #7a1b4d;
+  text-align: center;
+}
+
+.text h1 {
+  font-size: 1.6em;
+  color: #6d003d;
+}
+
+/* ===========================================================
+   ENVELOPE ANIMATION (converted from SCSS)
+   =========================================================== */
+
+body {
+  background-color: var(--color-bg);
+}
+
+.envlope-wrapper {
+  height: calc(var(--env-height) + 200px);
+}
+
+#envelope {
+  position: relative;
+  width: var(--env-width);
+  height: var(--env-height);
+  margin: auto;
+  top: 150px;
+  background-color: var(--color-flap);
+  border-bottom-left-radius: var(--env-border-radius);
+  border-bottom-right-radius: var(--env-border-radius);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.front {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 3;
+}
+
+/* Flap */
+.flap {
+  border-left: calc(var(--env-width) / 2) solid transparent;
+  border-right: calc(var(--env-width) / 2) solid transparent;
+  border-bottom: calc(var(--env-height) / 2 - 8px) solid transparent;
+  border-top: calc(var(--env-height) / 2 + 8px) solid var(--color-flap);
+  transform-origin: top;
+  pointer-events: none;
+}
+
+/* Pocket */
+.pocket {
+  border-left: calc(var(--env-width) / 2) solid var(--color-env);
+  border-right: calc(var(--env-width) / 2) solid var(--color-env);
+  border-bottom: calc(var(--env-height) / 2) solid var(--color-env2);
+  border-top: calc(var(--env-height) / 2) solid transparent;
+  border-bottom-left-radius: var(--env-border-radius);
+  border-bottom-right-radius: var(--env-border-radius);
+}
+
+/* Letter */
+.letter {
+    position: relative;
+    background-color: white;
+    width: 90%;
+    height: 90%;
+    top: 5%;
+    border-radius: 10px;
+    box-shadow: 0 2px 26px rgba(0, 0, 0, .12);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.letter:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+/* Lines inside letter */
+.words {
+  position: absolute;
+  left: 10%;
+  width: 80%;
+  height: 14%;
+  background-color: #eeeff0;
+}
+.words.line1 { top: 30%; }
+.words.line2 { top: 30%; }
+.words.line3 { top: 50%; }
+.words.line4 { top: 70%; }
+
+/* Opening animation */
+.open .flap {
+  transform: rotateX(180deg);
+  transition: transform .4s ease, z-index .6s;
+  z-index: 1;
+}
+
+.close .flap {
+  transform: rotateX(0deg);
+  transition: transform .4s .6s ease, z-index 1s;
+  z-index: 5;
+}
+
+.close .letter {
+  transform: translateY(0);
+  transition: transform .4s ease, z-index 1s;
+  z-index: 1;
+}
+
+.open .letter {
+  transform: translateY(calc(-1 * var(--env-height) / 0.8)); /* 90% up */
+  transition: transform .4s .6s ease, z-index .6s;
+  z-index: 2;
+}
+
+
+/* Hearts floating animation */
+.hearts {
+  position: absolute;
+  top: calc(var(--env-height) / 2);
+  left: 0; right: 0;
+  z-index: 2;
+}
+
+.heart {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+}
+
+/* Heart shape */
+.heart:before,
+.heart:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: var(--heart-width);
+  height: calc(var(--heart-width) * 1.6);
+  background: var(--color-heart);
+  border-radius: var(--heart-width) var(--heart-width) 0 0;
+}
+
+.heart:before {
+  left: var(--heart-width);
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.heart:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+/* Animation states */
+.close .heart {
+  opacity: 0;
+  animation: none;
+}
+
+/* Heart movement types */
+.a1 {
+  left: 20%;
+  transform: scale(0.6);
+  animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+  animation-fill-mode: forwards;
+  animation-delay: 0.7s;
+}
+
+.a2 {
+  left: 55%;
+  transform: scale(1);
+  animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+  animation-fill-mode: forwards;
+  animation-delay: 0.7s;
+}
+
+.a3 {
+  left: 10%;
+  transform: scale(0.8);
+  animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+  animation-fill-mode: forwards;
+  animation-delay: 0.7s;
+}
+
+/* Slide hearts upward */
+@keyframes slideUp {
+  0% { top: 0; }
+  100% { top: -600px; }
+}
+
+/* Side sway movement */
+@keyframes sideSway {
+  0% { margin-left: 0; }
+  100% { margin-left: 50px; }
+}
+
+/* Reset Button */
+.reset {
+  text-align: center;
+}
+
+.reset button {
+  font-weight: 800;
+  background: transparent;
+  border: 2px solid var(--color-env);
+  border-radius: 4px;
+  color: var(--color-env);
+  padding: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.reset button:hover {
+  background: var(--color-env);
+  color: white;
+}
