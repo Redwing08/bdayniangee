@@ -8,10 +8,10 @@
   --color-bg: #d8effd;
   --color-heart: #d00000;
 
-  --env-border-radius: 6px;
-  --env-width: 280px;
-  --env-height: 180px;
-  --heart-width: 50px;
+  --env-border-radius: 10px;
+    --env-width: 420px;   /* increased from 280 */
+  --env-height: 300px;  /* increased from 180 */
+  --heart-width: 60px;
 }
 
 /* GLOBAL */
